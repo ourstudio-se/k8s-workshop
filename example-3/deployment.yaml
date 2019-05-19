@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-3
+  labels:
+    app: example-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-3
+  template:
+    metadata:
+      labels:
+        app: example-3
+    spec:
+      containers:
+      - name: example-3
+        image: ourstudiose/k8s-workshop:example-3
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SECRET_DATA
+          valueFrom:
+            secretKeyRef:
+              name: example-3-secret
+              key: DATA
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: example-3-secret
+              key: PASSWORD

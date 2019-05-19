@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-1
+  labels:
+    app: example-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example-1
+  template:
+    metadata:
+      labels:
+        app: example-1
+    spec:
+      containers:
+      - name: example-1
+        image: ourstudiose/k8s-workshop:example-1
+        ports:
+        - containerPort: 8080

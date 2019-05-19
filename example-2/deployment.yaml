@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-2
+  labels:
+    app: example-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-2
+  template:
+    metadata:
+      labels:
+        app: example-2
+    spec:
+      containers:
+      - name: example-2
+        image: ourstudiose/k8s-workshop:example-2
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: example-2-config
+        env:
+        - name: MESSAGE
+          value: "Hello world!"
